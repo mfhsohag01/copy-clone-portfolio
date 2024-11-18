@@ -1,3 +1,70 @@
+const navlinks = document.querySelectorAll("header nav a");
+const logoLink = document.querySelector(".logo");
+const sections = document.querySelectorAll("section");
+
+const activepage = () => {
+  const header = document.querySelector("header");
+  const barBox = document.querySelector(".bars-box");
+
+  // Reset header
+  header.classList.remove("active");
+  setTimeout(() => {
+    header.classList.add("active");
+  }, 1100);
+
+  // Reset nav links
+  navlinks.forEach((link) => {
+    link.classList.remove("active");
+  });
+
+  // Reset barBox
+  barBox.classList.remove("active");
+  setTimeout(() => {
+    barBox.classList.add("active");
+  }, 1100);
+
+  // Reset sections
+  sections.forEach((section) => {
+    section.classList.remove("active");
+  });
+};
+
+// Add event listeners to nav links
+navlinks.forEach((link, idx) => {
+  link.addEventListener("click", () => {
+    if (!link.classList.contains("active")) {
+      activepage();
+
+      // Activate clicked link
+      link.classList.add("active");
+
+      // Activate corresponding section
+      setTimeout(() => {
+        if (sections[idx]) {
+          sections[idx].classList.add("active");
+        }
+      }, 1100);
+    }
+  });
+});
+
+// Add event listener to logo link
+logoLink.addEventListener("click", () => {
+  if (!navlinks[0].classList.contains("active")) {
+    activepage();
+
+    // Activate first nav link
+    navlinks[0].classList.add("active");
+
+    // Activate first section
+    setTimeout(() => {
+      if (sections[0]) {
+        sections[0].classList.add("active");
+      }
+    }, 1100);
+  }
+});
+
 const resumeBtns = document.querySelectorAll(".resume-btn");
 
 resumeBtns.forEach((btn, idx) => {
